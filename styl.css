@@ -187,3 +187,4 @@ footer a{color:var(--muted)}
 .pricecard .perks li:before{background:var(--ember)}
 .pricecard .perks b{color:var(--ember)}
 @media (max-width:600px){.ctabox{display:flex}.pc-price{font-size:38px}.pricecard{padding:18px}}
+@media (max-width:860px){.hero2 .quote{text-align:center}}
