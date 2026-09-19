@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /tri-noci-v-bouri-ukazka-k7q2.pdf
+Disallow: /dekujeme.html
