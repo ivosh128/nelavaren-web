@@ -67,5 +67,22 @@ var NASTAVENI = {
     });
   }
 
-  document.addEventListener("DOMContentLoaded", function () { bar(); form(); });
+  function share() {
+    var btns = document.querySelectorAll("[data-share]");
+    Array.prototype.forEach.call(btns, function (b) {
+      var puvodni = b.textContent;
+      b.addEventListener("click", function () {
+        var data = { title: "Tři noci v bouři – ukázka zdarma",
+                     text: "Čtu novou knihu Tři noci v bouři. První dvě kapitoly jsou zdarma, mrkni:",
+                     url: "https://nelavaren.cz/" };
+        if (navigator.share) { navigator.share(data).catch(function () {}); return; }
+        var t = data.text + " " + data.url;
+        var hotovo = function () { b.textContent = "Odkaz je zkopírovaný"; setTimeout(function () { b.textContent = puvodni; }, 2500); };
+        if (navigator.clipboard) { navigator.clipboard.writeText(t).then(hotovo, function () { prompt("Zkopíruj odkaz:", data.url); }); }
+        else { prompt("Zkopíruj odkaz:", data.url); }
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () { bar(); form(); share(); });
 })();
