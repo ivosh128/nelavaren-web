@@ -61,7 +61,7 @@ var NASTAVENI = {
       fetch(url, { method: "POST", body: data, mode: "no-cors" })
         .then(function () { location.href = "dekujeme.html"; })
         .catch(function () {
-          btn.disabled = false; btn.textContent = "Pošli mi ukázku";
+          btn.disabled = false; btn.textContent = "Chci ukázku zdarma";
           err.textContent = "Něco se nepovedlo. Zkus to prosím znovu za chvíli.";
         });
     });
