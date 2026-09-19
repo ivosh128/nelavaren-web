@@ -1,8 +1,8 @@
 /* ===== NASTAVENÍ: tyhle tři hodnoty doplníme, až budou účty ===== */
 var NASTAVENI = {
   metaPixelId: "DOPLNIT_PIXEL_ID",        // Meta pixel pro Nelu Varen
-  mailerliteUcet: "DOPLNIT_ACCOUNT_ID",   // z vložení formuláře MailerLite (číslo účtu)
-  mailerliteFormular: "DOPLNIT_FORM_ID"   // z vložení formuláře MailerLite (číslo formuláře)
+  mailerliteUcet: "2646388",   // z vložení formuláře MailerLite (číslo účtu)
+  mailerliteFormular: "199052731921466767"   // z vložení formuláře MailerLite (číslo formuláře)
 };
 /* ================================================================= */
 
@@ -49,6 +49,7 @@ var NASTAVENI = {
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = "Zkontroluj prosím e-mail."; return; }
       if (!f.vek.checked) { err.textContent = "Kniha je jen pro čtenářky a čtenáře starší 18 let."; return; }
       if (!f.souhlas.checked) { err.textContent = "Bez souhlasu ti ukázku nemůžeme poslat e-mailem."; return; }
+      if (!/^\d+$/.test(NASTAVENI.mailerliteUcet) || !/^\d+$/.test(NASTAVENI.mailerliteFormular)) { err.textContent = "Formulář se právě připravuje. Zkus to prosím za chvíli."; return; }
       var btn = f.querySelector("button"); btn.disabled = true; btn.textContent = "Odesílám…";
       var data = new FormData();
       data.append("fields[email]", email);
