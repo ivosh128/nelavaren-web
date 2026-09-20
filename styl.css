@@ -179,8 +179,8 @@ footer a{color:var(--muted)}
 .ctabox{display:inline-flex;flex-direction:column;align-items:center}
 .hero2 .meta{margin-top:20px;text-align:center}
 .price{color:var(--ember);font-weight:600;letter-spacing:.12em}
-.pricecard{margin:22px 0 4px;padding:22px 24px;border:1px solid rgba(226,183,122,.35);border-radius:14px;background:linear-gradient(180deg,rgba(226,183,122,.07),rgba(226,183,122,.02))}
-.pc-top{display:flex;align-items:center;gap:18px;padding-bottom:14px;border-bottom:1px solid rgba(226,183,122,.2)}
+.pricecard{margin:22px 0 4px;padding:22px 24px;border:1px solid rgba(240,160,92,.35);border-radius:14px;background:linear-gradient(180deg,rgba(240,160,92,.07),rgba(240,160,92,.02))}
+.pc-top{display:flex;align-items:center;gap:18px;padding-bottom:14px;border-bottom:1px solid rgba(240,160,92,.2)}
 .pc-price{font-family:Cinzel,Georgia,serif;font-size:44px;line-height:1;color:var(--ember);white-space:nowrap;padding-top:.1em}
 .pc-lbl{font:12px/1.6 Mont,Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .pricecard .perks{margin:14px 0 0}
@@ -198,8 +198,23 @@ footer a{color:var(--muted)}
 @media (max-width:860px){.hero2 .quote-q{margin:0 auto 6px;text-align:center}.hero2 .quote-q:before{margin:0 auto 16px}}
 
 /* doporučení kamarádce */
-.doporuc{max-width:560px;margin:30px auto 0;padding:22px 24px;border:1px solid rgba(226,183,122,.35);border-radius:14px;background:linear-gradient(180deg,rgba(226,183,122,.07),rgba(226,183,122,.02));text-align:center}
+.doporuc{max-width:560px;margin:30px auto 0;padding:22px 24px;border:1px solid rgba(240,160,92,.35);border-radius:14px;background:linear-gradient(180deg,rgba(240,160,92,.07),rgba(240,160,92,.02));text-align:center}
 .doporuc .pc-lbl{margin-bottom:10px}
 .doporuc p{font-style:normal!important;font-size:17px!important;line-height:1.6!important;color:var(--muted)!important;margin:0 0 16px!important}
 .sharebtn{display:inline-flex;align-items:center;padding:14px 26px;border-radius:999px;border:1px solid var(--ember);background:transparent;color:var(--ember);font:13px Mont,Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s}
 .sharebtn:hover{background:var(--ember);color:#0a0d13}
+
+/* oheň a srdce 20. 9. — teplý akcent proti chladné bouři */
+:root{--ember:#f0a05c;--fire:#e2603a}
+.hot{background:linear-gradient(180deg,#f7c07a 0%,#ef8a4c 55%,#d9542f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 0 14px rgba(232,104,58,.35))}
+.hero2 .quote-q:before{height:2px;width:72px;background:linear-gradient(90deg,#f5b56b,#e2603a 55%,transparent);box-shadow:0 0 12px rgba(232,104,58,.55);transform-origin:left center;animation:tep 1.5s ease-in-out infinite}
+@keyframes tep{0%{opacity:.5;transform:scaleX(.8)}10%{opacity:1;transform:scaleX(1)}20%{opacity:.65;transform:scaleX(.86)}32%{opacity:1;transform:scaleX(1)}60%,100%{opacity:.5;transform:scaleX(.8)}}
+.hero2 .foto:before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 55% 50% at 64% 60%,rgba(240,120,60,.20),rgba(240,120,60,0) 70%);mix-blend-mode:screen}
+.cta{box-shadow:0 10px 40px rgba(232,104,58,.30),0 0 0 1px rgba(245,181,107,.25)}
+.cta:hover{box-shadow:0 16px 54px rgba(232,104,58,.48),0 0 0 1px rgba(245,181,107,.45)}
+.genre{color:var(--ember)}
+@media (max-width:860px){.hero2 .quote-q:before{transform-origin:center}}
+@media (prefers-reduced-motion:reduce){.hero2 .quote-q:before{animation:none;opacity:1;transform:none}}
+.adult{margin-top:14px;display:inline-block;padding:6px 14px;border:1px solid rgba(240,160,92,.45);border-radius:999px;font:11px Mont,Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--ember)}
+@media (max-width:600px){.hero2 .kicker{letter-spacing:.28em;font-size:11px}}
+.hero2 .foto:before{background:radial-gradient(ellipse 55% 50% at 64% 60%,rgba(240,120,60,.32),rgba(240,120,60,0) 70%)}
