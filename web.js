@@ -61,15 +61,49 @@ var NASTAVENI = {
     return { fbc: fbc, fbp: fbp, external_id: ext };
   }
 
+  // odkud návštěvník přišel – zapamatujeme si to na celou návštěvu
+  function puvod() {
+    var p = new URLSearchParams(location.search);
+    var ulozeny = {};
+    try { ulozeny = JSON.parse(sessionStorage.getItem("nv_puvod") || "{}"); } catch (e) {}
+    if (!ulozeny.ulozeno) {
+      ulozeny = {
+        ulozeno: 1,
+        utm_source: p.get("utm_source") || "",
+        utm_medium: p.get("utm_medium") || "",
+        utm_campaign: p.get("utm_campaign") || "",
+        odkud: document.referrer || ""
+      };
+      try { sessionStorage.setItem("nv_puvod", JSON.stringify(ulozeny)); } catch (e) {}
+    }
+    return ulozeny;
+  }
+
+  // vlastní návštěvy do statistik nepatří:
+  // otevři https://nikolasvaren.cz/?nemerit=1 na každém svém zařízení (zapnout)
+  // a https://nikolasvaren.cz/?nemerit=0 (vypnout)
+  (function () {
+    var p = new URLSearchParams(location.search).get("nemerit");
+    if (p === null) return;
+    try { p === "0" ? localStorage.removeItem("nv_nemerit") : localStorage.setItem("nv_nemerit", "1"); } catch (e) {}
+  })();
+  function nemerit() {
+    try { return localStorage.getItem("nv_nemerit") === "1"; } catch (e) { return false; }
+  }
+
   window.nvUdalost = function (nazev, extra) {
+    if (nemerit()) return;                        // tohle zařízení se nepočítá
     if (read() !== "ano") return;                 // bez souhlasu neposíláme nic
     var i = identifikace();
+    var p = puvod();
     var telo = {
       event_name: nazev,
       event_id: nahodneId(),
       event_source_url: location.href,
       user_agent: navigator.userAgent,
-      fbc: i.fbc, fbp: i.fbp, external_id: i.external_id
+      fbc: i.fbc, fbp: i.fbp, external_id: i.external_id,
+      utm_source: p.utm_source, utm_medium: p.utm_medium, utm_campaign: p.utm_campaign,
+      odkud: p.odkud
     };
     if (extra) { for (var k in extra) telo[k] = extra[k]; }
     try {
@@ -83,6 +117,7 @@ var NASTAVENI = {
   };
 
   function mereniStart() {
+    if (nemerit()) return;                        // tohle zařízení se nepočítá nikde
     loadGA();
     nvUdalost("PageView");
     var ev = document.body && document.body.dataset.event;   // dekujeme.html má data-event="Lead"
