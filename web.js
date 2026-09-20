@@ -1,6 +1,6 @@
 /* ===== NASTAVENÍ: tyhle tři hodnoty doplníme, až budou účty ===== */
 var NASTAVENI = {
-  metaPixelId: "DOPLNIT_PIXEL_ID",        // Meta pixel pro Nelu Varen
+  metaPixelId: "DOPLNIT_PIXEL_ID",        // Meta pixel pro Nikolase Varena
   mailerliteUcet: "2646388",   // z vložení formuláře MailerLite (číslo účtu)
   mailerliteFormular: "199052731921466767"   // z vložení formuláře MailerLite (číslo formuláře)
 };
@@ -74,7 +74,7 @@ var NASTAVENI = {
       b.addEventListener("click", function () {
         var data = { title: "Tři noci v bouři – ukázka zdarma",
                      text: "Čtu novou knihu Tři noci v bouři. První dvě kapitoly jsou zdarma, mrkni:",
-                     url: "https://nelavaren.cz/" };
+                     url: "https://nikolasvaren.cz/" };
         if (navigator.share) { navigator.share(data).catch(function () {}); return; }
         var t = data.text + " " + data.url;
         var hotovo = function () { b.textContent = "Odkaz je zkopírovaný"; setTimeout(function () { b.textContent = puvodni; }, 2500); };
