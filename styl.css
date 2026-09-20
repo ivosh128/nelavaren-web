@@ -218,3 +218,12 @@ footer a{color:var(--muted)}
 .adult{margin-top:14px;display:inline-block;padding:6px 14px;border:1px solid rgba(240,160,92,.45);border-radius:999px;font:11px Mont,Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--ember)}
 @media (max-width:600px){.hero2 .kicker{letter-spacing:.28em;font-size:11px}}
 .hero2 .foto:before{background:radial-gradient(ellipse 55% 50% at 64% 60%,rgba(240,120,60,.32),rgba(240,120,60,0) 70%)}
+
+/* --- mobil: datum vydání patří na tmavé pozadí, ne na fotku rukou --- */
+@media (max-width:860px){
+  .ctabox{width:100%}
+  .hero2 .meta{order:-1;margin:0 0 26px;font-size:12px;letter-spacing:.2em;color:#c8d0dc}
+  .hero2 .meta b,.hero2 .meta .den{color:var(--ember)}
+  .cta{order:0}
+  .adult{order:1;margin-top:20px;background:rgba(9,11,17,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-color:rgba(240,160,92,.6);color:#f6c894}
+}
