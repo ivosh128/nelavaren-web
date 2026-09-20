@@ -39,7 +39,31 @@
       requestAnimationFrame(loop);
     })();
   }
-  document.addEventListener('DOMContentLoaded',function(){reveal();snow();
+  // plovoucí lišta s výzvou: objeví se po odrolování hero a schová se u formuláře
+  function lista(){
+    var el=document.getElementById('lista'); if(!el) return;
+    var cil=document.getElementById('ukazka-sekce');
+    var hero=document.querySelector('.hero2');
+    var ck=document.getElementById('cookies');
+    var uFormulare=false;
+    function uprav(){
+      var hranice=hero?hero.offsetHeight*0.8:520;
+      var ckVidet=ck&&getComputedStyle(ck).display!=='none';
+      el.classList.toggle('on', window.scrollY>hranice && !uFormulare && !ckVidet);
+    }
+    if('IntersectionObserver' in window && cil){
+      new IntersectionObserver(function(en){uFormulare=en[0].isIntersecting;uprav()},{threshold:0}).observe(cil);
+    }
+    if('MutationObserver' in window && ck){
+      new MutationObserver(uprav).observe(ck,{attributes:true,attributeFilter:['style']});
+    }
+    addEventListener('scroll',uprav,{passive:true});
+    addEventListener('resize',uprav);
+    var btn=el.querySelector('.lista-cta');
+    if(btn) btn.addEventListener('click',function(){ if(window.gtag) gtag('event','select_promotion',{promotion_name:'plovouci_lista'}); });
+    uprav();
+  }
+  document.addEventListener('DOMContentLoaded',function(){reveal();snow();lista();
     requestAnimationFrame(function(){document.querySelectorAll('.hero2 .rv').forEach(function(e){e.classList.add('on')})});
   });
 })();
