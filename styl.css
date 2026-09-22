@@ -334,3 +334,12 @@ footer a{color:var(--muted)}
   .rl-txt i{display:none}
 }
 @media (prefers-reduced-motion:reduce){.rec-lista,.rl-txt{transition:none}}
+
+/* --- recenze na zlatém podkladu --- */
+.rec{background:linear-gradient(165deg,#f2d7a8 0%,#e0b783 45%,#c99d64 100%);
+  border:1px solid rgba(255,255,255,.3);
+  box-shadow:0 20px 54px rgba(0,0,0,.55),0 0 34px rgba(226,183,122,.20),inset 0 1px 0 rgba(255,255,255,.4)}
+.rec blockquote{color:#171a22}
+.rec figcaption{color:#2a2418}
+.rec figcaption span{color:#6a5a3c}
+.rec-cara{background:linear-gradient(90deg,#8a5f28,#b8823c 65%,rgba(184,130,60,0))}
