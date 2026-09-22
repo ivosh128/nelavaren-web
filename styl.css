@@ -343,3 +343,22 @@ footer a{color:var(--muted)}
 .rec figcaption{color:#2a2418}
 .rec figcaption span{color:#6a5a3c}
 .rec-cara{background:linear-gradient(90deg,#8a5f28,#b8823c 65%,rgba(184,130,60,0))}
+
+/* --- recenze: naše značková zlatá #e2b77a --- */
+.rec{background:linear-gradient(165deg,#ecc894 0%,#e2b77a 52%,#d3a76a 100%);
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:0 20px 54px rgba(0,0,0,.55),0 0 36px rgba(226,183,122,.22),inset 0 1px 0 rgba(255,255,255,.38)}
+.rec blockquote{color:#161920}
+.rec figcaption{color:#28221a}
+.rec figcaption span{color:#6b5b3f}
+.rec-cara{background:linear-gradient(90deg,#8b6128,#b4802f 65%,rgba(180,128,47,0))}
+
+/* --- oprava horní lišty: neprůhledná + podpis i na mobilu --- */
+.rec-lista{background:#090c12;-webkit-backdrop-filter:none;backdrop-filter:none;
+  box-shadow:0 8px 28px rgba(0,0,0,.75),0 0 24px rgba(226,183,122,.14)}
+@media (max-width:620px){
+  .rl-in{gap:8px;padding:8px 14px 9px;min-height:0;flex-wrap:wrap}
+  .rl-hv{font-size:10px;letter-spacing:.06em}
+  .rl-txt{font-size:14px;line-height:1.35}
+  .rl-txt i{display:block;margin-left:0;margin-top:3px;font-size:9.5px;letter-spacing:.16em}
+}
