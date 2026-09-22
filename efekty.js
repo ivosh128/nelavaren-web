@@ -63,7 +63,40 @@
     if(btn) btn.addEventListener('click',function(){ if(window.gtag) gtag('event','select_promotion',{promotion_name:'plovouci_lista'}); });
     uprav();
   }
-  document.addEventListener('DOMContentLoaded',function(){reveal();snow();lista();
+  // horní lišta s recenzemi: drží se nahoře a citáty se střídají
+  function recLista(){
+    var el=document.getElementById('recLista'); if(!el) return;
+    var txt=document.getElementById('recText');
+    var hero=document.querySelector('.hero2');
+    var sek=document.getElementById('recenze');
+    var vRecenzich=false;
+    var citaty=[
+      ['Potřebuji okamžitě víc a\u00a0víc.','Ivana'],
+      ['Je to fakt úžasný.','Ivana'],
+      ['Napínavé, vzrušující…','Kateřina']
+    ];
+    var i=0;
+    function uprav(){
+      var h=hero?hero.offsetHeight*0.85:520;
+      el.classList.toggle('on', window.scrollY>h && !vRecenzich);
+    }
+    if('IntersectionObserver' in window && sek){
+      new IntersectionObserver(function(en){vRecenzich=en[0].isIntersecting;uprav()},{threshold:0}).observe(sek);
+    }
+    addEventListener('scroll',uprav,{passive:true});
+    addEventListener('resize',uprav);
+    uprav();
+    setInterval(function(){
+      if(!el.classList.contains('on')) return;
+      txt.style.opacity=0;
+      setTimeout(function(){
+        i=(i+1)%citaty.length;
+        txt.innerHTML='„'+citaty[i][0]+'“ <i>'+citaty[i][1]+'</i>';
+        txt.style.opacity=1;
+      },420);
+    },5200);
+  }
+  document.addEventListener('DOMContentLoaded',function(){reveal();snow();lista();recLista();
     requestAnimationFrame(function(){document.querySelectorAll('.hero2 .rv').forEach(function(e){e.classList.add('on')})});
   });
 })();
