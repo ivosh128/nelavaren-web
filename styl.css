@@ -362,3 +362,11 @@ footer a{color:var(--muted)}
   .rl-txt{font-size:14px;line-height:1.35}
   .rl-txt i{display:block;margin-left:0;margin-top:3px;font-size:9.5px;letter-spacing:.16em}
 }
+
+/* --- mobil: datum vydání leží na fotce, potřebuje podklad --- */
+@media (max-width:860px){
+  .hero2 .meta{display:inline-block;padding:10px 20px;border-radius:999px;
+    background:rgba(8,10,16,.80);border:1px solid rgba(255,255,255,.12);
+    color:#dce3ed;box-shadow:0 6px 22px rgba(0,0,0,.5)}
+  .hero2 .meta .den{color:var(--ember)}
+}
