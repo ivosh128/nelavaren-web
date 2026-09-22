@@ -402,3 +402,15 @@ footer a{color:var(--muted)}
   .rules .kicker{margin-bottom:24px}
   .rules .foot{margin-top:24px;font-size:20px}
 }
+
+/* --- mobil: posunout text výš, ať je vidět stisk zápěstí --- */
+@media (max-width:860px){
+  .hero2 .in{padding-top:38px}
+  .rec-bar{margin-bottom:14px}
+  .hero2 .kicker{margin-bottom:14px}
+  .hero2 .sub{margin-bottom:18px}
+  .hero2 .quote{margin-bottom:20px}
+  .hero2 .quote-q:before{margin-bottom:12px}
+  .hero2 .meta{margin-bottom:16px}
+  .adult{margin-top:14px}
+}
