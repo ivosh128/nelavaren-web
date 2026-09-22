@@ -392,3 +392,13 @@ footer a{color:var(--muted)}
     border-bottom:1px solid rgba(226,183,122,.45);padding-bottom:6px}
 }
 .vic-mobil{position:relative;z-index:2}
+
+/* --- mobil: pravidla jen jako tři věty --- */
+@media (max-width:760px){
+  .rule p{display:none}
+  .rule{padding:18px 20px 20px}
+  .rule .n{font-size:26px;-webkit-text-stroke:1px #7d8b9e}
+  .rule h3{font-size:23px;margin:6px 0 0;line-height:1.25}
+  .rules .kicker{margin-bottom:24px}
+  .rules .foot{margin-top:24px;font-size:20px}
+}
