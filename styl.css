@@ -370,3 +370,25 @@ footer a{color:var(--muted)}
     color:#dce3ed;box-shadow:0 6px 22px rgba(0,0,0,.5)}
   .hero2 .meta .den{color:var(--ember)}
 }
+
+/* --- mobil: sevřenější pravidla a kratší ukázka --- */
+.vic-mobil{display:none}
+@media (max-width:760px){
+  .rules .kicker{margin-bottom:30px}
+  .rule{padding:24px 20px 26px}
+  .rule .n{font-size:44px}
+  .rule h3{font-size:24px;margin:12px 0 8px}
+  .rule p{font-size:17px;line-height:1.55}
+  .rules .foot{margin-top:28px;font-size:21px}
+
+  .excerpt .kicker{margin-bottom:20px}
+  .excerpt .page-txt p{font-size:19px;line-height:1.58;margin:0 0 12px}
+  .excerpt .page-txt p:first-child{font-size:25px}
+  .excerpt .page-txt .dal{display:none}
+  .excerpt .fade:after{height:110px}
+  .vic-mobil{display:block;margin:26px 0 0;text-align:center}
+  .vic-mobil a{font-family:Mont,Arial,sans-serif;font-size:14px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ember);text-decoration:none;
+    border-bottom:1px solid rgba(226,183,122,.45);padding-bottom:6px}
+}
+.vic-mobil{position:relative;z-index:2}
