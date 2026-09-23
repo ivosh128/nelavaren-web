@@ -18,9 +18,9 @@
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="favicon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="styl.css?v=8">
-<script src="web.js?v=8"></script>
-<script src="efekty.js?v=8"></script>
+<link rel="stylesheet" href="styl.css?v=9">
+<script src="web.js?v=9"></script>
+<script src="efekty.js?v=9"></script>
 </head>
 <body class="v2">
 <canvas id="snih" aria-hidden="true"></canvas>
@@ -154,6 +154,11 @@
         </ul>
       </div>
       <form class="form" id="ukazka" novalidate>
+        <div class="lang" role="radiogroup" aria-label="Jazyk ukázky">
+          <span class="lang-lbl">Jazyk ukázky</span>
+          <label class="lang-o"><input type="radio" name="jazyk" value="cs" checked><span>Čeština</span></label>
+          <label class="lang-o"><input type="radio" name="jazyk" value="sk"><span>Slovenčina</span></label>
+        </div>
         <div class="row">
           <input type="text" name="jmeno" placeholder="Křestní jméno" autocomplete="given-name" aria-label="Křestní jméno">
           <input type="email" name="email" placeholder="Tvůj e-mail" autocomplete="email" required aria-label="E-mail">

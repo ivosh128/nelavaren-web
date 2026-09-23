@@ -141,6 +141,15 @@ var NASTAVENI = {
   function form() {
     var f = document.getElementById("ukazka");
     if (!f) return;
+    /* předvyplnění jazyka podle prohlížeče a časového pásma */
+    try {
+      var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || "");
+      var lg = (navigator.language || "").toLowerCase();
+      if (tz === "Europe/Bratislava" || lg.indexOf("sk") === 0) {
+        var sk = f.querySelector('input[name="jazyk"][value="sk"]');
+        if (sk) sk.checked = true;
+      }
+    } catch (e) {}
     f.addEventListener("submit", function (e) {
       e.preventDefault();
       var err = f.querySelector(".err"); err.textContent = "";
@@ -151,9 +160,11 @@ var NASTAVENI = {
       if (!f.souhlas.checked) { err.textContent = "Bez souhlasu ti ukázku nemůžeme poslat e-mailem."; return; }
       if (!/^\d+$/.test(NASTAVENI.mailerliteUcet) || !/^\d+$/.test(NASTAVENI.mailerliteFormular)) { err.textContent = "Formulář se právě připravuje. Zkus to prosím za chvíli."; return; }
       var btn = f.querySelector("button"); btn.disabled = true; btn.textContent = "Odesílám…";
+      var jaz = (f.querySelector('input[name="jazyk"]:checked') || {}).value || "cs";
       var data = new FormData();
       data.append("fields[email]", email);
       data.append("fields[name]", jmeno);
+      data.append("fields[jazyk]", jaz);
       data.append("ml-submit", "1");
       data.append("anticsrf", "true");
       var url = "https://assets.mailerlite.com/jsonp/" + NASTAVENI.mailerliteUcet +

@@ -414,3 +414,17 @@ footer a{color:var(--muted)}
   .hero2 .meta{margin-bottom:16px}
   .adult{margin-top:14px}
 }
+
+
+/* --- přepínač jazyka ukázky --- */
+.lang{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.lang-lbl{font:11px/1 Mont,Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.lang-o{position:relative}
+.lang-o input{position:absolute;opacity:0;width:0;height:0}
+.lang-o span{display:inline-block;padding:10px 20px;border-radius:999px;cursor:pointer;
+  font:12px/1 Mont,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--line);color:var(--muted);background:rgba(255,255,255,.02);transition:.18s}
+.lang-o span:hover{color:var(--text);border-color:#33405280}
+.lang-o input:checked + span{border-color:rgba(226,183,122,.65);color:var(--ember);background:rgba(226,183,122,.10)}
+.lang-o input:focus-visible + span{outline:2px solid var(--ember);outline-offset:2px}
+@media (max-width:420px){.lang-lbl{width:100%;margin-bottom:2px}.lang-o span{padding:9px 16px}}
