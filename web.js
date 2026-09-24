@@ -172,7 +172,7 @@ var NASTAVENI = {
       fetch(url, { method: "POST", body: data, mode: "no-cors" })
         .then(function () {
           if (window.gtag) gtag("event", "generate_lead", { method: "formular_ukazka" });
-          nvUdalost("Lead", { email: email, jmeno: jmeno, custom_data: { content_name: "Ukazka zdarma" } });
+          nvUdalost("Lead", { email: email, jmeno: jmeno, jazyk: jaz, custom_data: { content_name: "Ukazka zdarma" } });
           setTimeout(function () { location.href = "dekujeme.html"; }, 250);
         })
         .catch(function () {
