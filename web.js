@@ -7,6 +7,40 @@ var NASTAVENI = {
 };
 /* ===================== */
 
+/* texty podle jazyka stránky (html lang) */
+var TEXTY = {
+  cs: {
+    email:   "Zkontroluj prosím e-mail.",
+    vek:     "Kniha je jen pro čtenářky a čtenáře starší 18 let.",
+    souhlas: "Bez souhlasu ti ukázku nemůžeme poslat e-mailem.",
+    ceka:    "Formulář se právě připravuje. Zkus to prosím za chvíli.",
+    posilam: "Odesílám…",
+    chyba:   "Něco se nepovedlo. Zkus to prosím znovu za chvíli.",
+    sdilTit: "Tři noci v bouři – ukázka zdarma",
+    sdilTxt: "Čtu novou knihu Tři noci v bouři. První dvě kapitoly jsou zdarma, mrkni:",
+    sdilUrl: "https://nikolasvaren.cz/",
+    sdilOk:  "Odkaz je zkopírovaný",
+    sdilPrompt: "Zkopíruj odkaz:"
+  },
+  pl: {
+    email:   "Sprawdź proszę adres e-mail.",
+    vek:     "Książka jest tylko dla czytelniczek i czytelników powyżej 18 lat.",
+    souhlas: "Bez zgody nie możemy wysłać Ci fragmentu e-mailem.",
+    ceka:    "Formularz jest właśnie przygotowywany. Spróbuj proszę za chwilę.",
+    posilam: "Wysyłam…",
+    chyba:   "Coś poszło nie tak. Spróbuj proszę jeszcze raz za chwilę.",
+    sdilTit: "Trzy noce w burzy – darmowy fragment",
+    sdilTxt: "Czytam nową książkę Trzy noce w burzy. Dwa pierwsze rozdziały są za darmo, zobacz:",
+    sdilUrl: "https://nikolasvaren.cz/pl/",
+    sdilOk:  "Link skopiowany",
+    sdilPrompt: "Skopiuj link:"
+  }
+};
+function T() {
+  var l = (document.documentElement.getAttribute("lang") || "cs").slice(0, 2);
+  return TEXTY[l] || TEXTY.cs;
+}
+
 (function () {
   var KEY = "nv_cookies";
   function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
@@ -150,17 +184,18 @@ var NASTAVENI = {
         if (sk) sk.checked = true;
       }
     } catch (e) {}
+    var t = T();
     f.addEventListener("submit", function (e) {
       e.preventDefault();
       var err = f.querySelector(".err"); err.textContent = "";
       var email = f.email.value.trim();
       var jmeno = f.jmeno.value.trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = "Zkontroluj prosím e-mail."; return; }
-      if (!f.vek.checked) { err.textContent = "Kniha je jen pro čtenářky a čtenáře starší 18 let."; return; }
-      if (!f.souhlas.checked) { err.textContent = "Bez souhlasu ti ukázku nemůžeme poslat e-mailem."; return; }
-      if (!/^\d+$/.test(NASTAVENI.mailerliteUcet) || !/^\d+$/.test(NASTAVENI.mailerliteFormular)) { err.textContent = "Formulář se právě připravuje. Zkus to prosím za chvíli."; return; }
-      var btn = f.querySelector("button"); btn.disabled = true; btn.textContent = "Odesílám…";
-      var jaz = (f.querySelector('input[name="jazyk"]:checked') || {}).value || "cs";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = t.email; return; }
+      if (!f.vek.checked) { err.textContent = t.vek; return; }
+      if (!f.souhlas.checked) { err.textContent = t.souhlas; return; }
+      if (!/^\d+$/.test(NASTAVENI.mailerliteUcet) || !/^\d+$/.test(NASTAVENI.mailerliteFormular)) { err.textContent = t.ceka; return; }
+      var btn = f.querySelector("button"); var btnText = btn.textContent; btn.disabled = true; btn.textContent = t.posilam;
+      var jaz = (f.querySelector('input[name="jazyk"]:checked') || {}).value || document.body.getAttribute("data-jazyk") || "cs";
       var data = new FormData();
       data.append("fields[email]", email);
       data.append("fields[name]", jmeno);
@@ -173,11 +208,12 @@ var NASTAVENI = {
         .then(function () {
           if (window.gtag) gtag("event", "generate_lead", { method: "formular_ukazka" });
           nvUdalost("Lead", { email: email, jmeno: jmeno, jazyk: jaz, custom_data: { content_name: "Ukazka zdarma" } });
-          setTimeout(function () { location.href = "dekujeme.html"; }, 250);
+          var diky = document.body.getAttribute("data-diky") || "dekujeme.html";
+          setTimeout(function () { location.href = diky; }, 250);
         })
         .catch(function () {
-          btn.disabled = false; btn.textContent = "Chci ukázku zdarma";
-          err.textContent = "Něco se nepovedlo. Zkus to prosím znovu za chvíli.";
+          btn.disabled = false; btn.textContent = btnText;
+          err.textContent = t.chyba;
         });
     });
   }
@@ -189,14 +225,13 @@ var NASTAVENI = {
       var puvodni = b.textContent;
       b.addEventListener("click", function () {
         if (window.gtag) gtag("event", "share", { method: "tlacitko" });
-        var data = { title: "Tři noci v bouři – ukázka zdarma",
-                     text: "Čtu novou knihu Tři noci v bouři. První dvě kapitoly jsou zdarma, mrkni:",
-                     url: "https://nikolasvaren.cz/" };
+        var t = T();
+        var data = { title: t.sdilTit, text: t.sdilTxt, url: t.sdilUrl };
         if (navigator.share) { navigator.share(data).catch(function () {}); return; }
-        var t = data.text + " " + data.url;
-        var hotovo = function () { b.textContent = "Odkaz je zkopírovaný"; setTimeout(function () { b.textContent = puvodni; }, 2500); };
-        if (navigator.clipboard) { navigator.clipboard.writeText(t).then(hotovo, function () { prompt("Zkopíruj odkaz:", data.url); }); }
-        else { prompt("Zkopíruj odkaz:", data.url); }
+        var text = data.text + " " + data.url;
+        var hotovo = function () { b.textContent = t.sdilOk; setTimeout(function () { b.textContent = puvodni; }, 2500); };
+        if (navigator.clipboard) { navigator.clipboard.writeText(text).then(hotovo, function () { prompt(t.sdilPrompt, data.url); }); }
+        else { prompt(t.sdilPrompt, data.url); }
       });
     });
   }
