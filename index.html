@@ -24,6 +24,29 @@
 <link rel="stylesheet" href="styl.css?v=11">
 <script src="web.js?v=11"></script>
 <script src="efekty.js?v=11"></script>
+<style>
+/* Recenze - kompaktni verze. Je to tady a ne ve styl.css schvalne: zmena stylu
+   by znamenala prepsat ?v= ve vsech strankach vcetne polskych. */
+.rec-grid{max-width:1100px;gap:16px;margin-top:34px}
+.rec{padding:24px 22px 20px;border-radius:14px}
+.rec-cara{width:32px;margin-bottom:14px}
+.rec blockquote{font-size:16px;line-height:1.58}
+.rec figcaption{margin-top:16px;font-size:11px;letter-spacing:.14em}
+.hvezdy b{font-size:22px}
+.hvezdy span{font-size:12px;margin-top:8px}
+@media (min-width:1000px){.rec-grid{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:700px) and (max-width:999px){.rec-grid{grid-template-columns:repeat(2,1fr);max-width:680px}}
+@media (max-width:699px){
+  .rec-grid{display:flex;max-width:none;gap:12px;margin:26px -22px 0;padding:2px 22px 12px;
+    overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .rec-grid::-webkit-scrollbar{display:none}
+  .rec{flex:0 0 76%;margin:0;scroll-snap-align:center;padding:22px 20px 18px}
+  .rec.rv{opacity:1;transform:none}
+  .rec blockquote{font-size:17px}
+  .rec-pod{margin-top:18px}
+}
+</style>
 </head>
 <body class="v2">
 <canvas id="snih" aria-hidden="true"></canvas>
@@ -115,7 +138,7 @@
 <section class="sec recenze-sekce" id="recenze">
   <div class="kicker rv" style="text-align:center">Co říkají první čtenářky</div>
   <div class="hvezdy rv d1"><b>★★★★★</b><span>4 recenze · hodnocení 5,0 z&nbsp;5</span></div>
-  <div class="rec-grid" style="max-width:660px">
+  <div class="rec-grid">
     <figure class="rec rv d1">
       <div class="rec-cara"></div>
       <blockquote>Příběh, to jak je to psycho a&nbsp;jak mě dokázaly tyhle dvě kapitoly neuvěřitelně navnadit. Potřebuji okamžitě víc a&nbsp;víc.</blockquote>
